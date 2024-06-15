@@ -27,16 +27,17 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Submit an answer
+// Submit answers in batch
 router.post("/answer", async (req, res) => {
-  const { userId, questionId, answer } = req.body;
+  const answers = req.body;
 
   try {
-    console.log(req.body);
-    const user = await User.findById(userId);
-    user.answers.push({ questionId, answer });
-    await user.save();
-    res.status(201).json(user);
+    for (const { userId, questionId, answer } of answers) {
+      const user = await User.findById(userId);
+      user.answers.push({ questionId, answer });
+      await user.save();
+    }
+    res.status(201).json({ message: "Answers submitted successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

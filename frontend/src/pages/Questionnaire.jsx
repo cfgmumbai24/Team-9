@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 const QuestionsList = () => {
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const backendURI =
     import.meta.env.VITE_BACKEND_URI || "http://localhost:3000";
@@ -14,15 +16,38 @@ const QuestionsList = () => {
       .catch((error) => console.error("Error fetching questions:", error));
   }, []);
 
-  const handleSubmit = (questionId, answer) => {
+  const handleOptionChange = (questionId, option) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: option,
+    }));
+  };
+
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+
+    const answerPayload = Object.entries(answers).map(
+      ([questionId, answer]) => ({
+        userId,
+        questionId,
+        answer,
+      })
+    );
+
     fetch(`${backendURI}/api/questions/answer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, questionId, answer }),
+      body: JSON.stringify(answerPayload),
     })
       .then((response) => response.json())
-      .then((data) => console.log("Answer submitted:", data))
-      .catch((error) => console.error("Error submitting answer:", error));
+      .then((data) => {
+        console.log("Answers submitted:", data);
+        setIsSubmitting(false);
+      })
+      .catch((error) => {
+        console.error("Error submitting answers:", error);
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -35,15 +60,25 @@ const QuestionsList = () => {
             <ul>
               {question.options.map((option, index) => (
                 <li key={index}>
-                  <button onClick={() => handleSubmit(question._id, option)}>
+                  <label>
+                    <input
+                      type="radio"
+                      name={`question-${question._id}`}
+                      value={option}
+                      onChange={() => handleOptionChange(question._id, option)}
+                      checked={answers[question._id] === option}
+                    />
                     {option}
-                  </button>
+                  </label>
                 </li>
               ))}
             </ul>
           </li>
         ))}
       </ul>
+      <button onClick={handleSubmit} disabled={isSubmitting}>
+        Submit Answers
+      </button>
     </div>
   );
 };
