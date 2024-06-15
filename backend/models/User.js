@@ -1,44 +1,76 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
-const userSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    required: true,
-    default: process.env.USER_ROLE,
-  },
-  avatar: {
-    type: String,
-  },
-  district: {
-    type: String,
-  },
-  languages: [String],
+const userSchema = mongoose.Schema(
+	{
+		name: {
+			type: String,
+			required: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+		role: {
+			type: String,
+			enum: ['student', 'mentor', 'admin'],
+			required: true,
+		},
+		avatar: {
+			type: String,
+		},
+		district: {
+			type: String,
+		},
+		languages: [String],
+		courses: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Course',
+			},
+		],
 
-  courses: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
+		coursesTaught: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Course',
+			},
+		],
+		mentorInformation: {
+			speciality: {
+				type: String,
+			},
+			qualification: {
+				type: String,
+			},
+			approval: {
+				type: Boolean,
+			},
+		},
+	},
+	{
+		timestamps: true,
+	}
+);
 
-  coursesTaught: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
+userSchema.methods.matchPassword = async function (enteredPassword) {
+	return await bcrypt.compare(enteredPassword, this.password);
+};
+
+userSchema.pre('save', async function (next) {
+	if (!this.isModified('password')) {
+		next();
+	}
+
+	const salt = await bcrypt.genSalt(10);
+	this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 export default User;
