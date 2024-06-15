@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomTable from "../components/customUI/Table";
+import { generateImageUrls } from "../utils";
+import HeaderCarousel from "../components/customUI/Header";
 
 const tableMetadata = [
   {
@@ -30,6 +32,7 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
 
   const backendURI = import.meta.env.VITE_BACKEND_URI;
+  const dummyImages = generateImageUrls(5);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -48,6 +51,14 @@ const Courses = () => {
 
   return (
     <div>
+      <HeaderCarousel
+        descriptionText={
+          " The users can get guidance for the ideation of their fields of study from here "
+        }
+        headerText={"Courses"}
+        images={dummyImages}
+      />
+
       <CustomTable
         columns={tableMetadata}
         data={courses?.map((course) => ({
