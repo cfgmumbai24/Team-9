@@ -1,7 +1,10 @@
-import Navbar from "../components/customUI/Navbar";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Home = () => {
-  <Navbar />;
+  const { userId, setUserId } = useContext(UserContext);
+  console.log(userId, setUserId);
+
   return <div>Home</div>;
 };
 

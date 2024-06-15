@@ -2,6 +2,7 @@
 import express from "express";
 import Questions from "../models/Questions.js";
 import User from "../models/User.js";
+import { interestmapper } from "../utils/mapToInterests.js";
 
 const router = express.Router();
 
@@ -37,6 +38,17 @@ router.post("/answer", async (req, res) => {
       user.answers.push({ questionId, answer });
       await user.save();
     }
+
+    const { userId } = answers[0];
+    const dbuser = await User.findById(userId);
+    const interests = interestmapper(dbuser.answers);
+    dbuser.interests = interests;
+
+    console.log(interests);
+
+    console.log(dbuser);
+
+    await dbuser.save();
     res.status(201).json({ message: "Answers submitted successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });

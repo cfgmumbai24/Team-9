@@ -1,13 +1,27 @@
 import Course from "../models/Course.js";
+import User from "../models/User.js";
 
 export const getCourses = async (req, res) => {
   try {
-    const interests = ["programming", "AI", "advanced"];
+    const { userId } = req.query;
+
+    // convert it to a mongoose compatible object id
+
+    const uid = JSON.parse(JSON.stringify(userId));
+
+    const user = await User.findById(uid);
+
+    console.log("user", user);
+
+    const interests = user.interests;
+
+    console.log("userId", userId);
+    console.log("interests", interests);
 
     const courses = await Course.find({}).populate("videos");
     const finalCourses = [];
 
-    // all the courses that contain any of the interests
+    // all the course s that contain any of the interests
 
     let fg = false;
 

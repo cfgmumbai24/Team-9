@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserContext";
 
 const QuestionsList = () => {
   const [questions, setQuestions] = useState([]);
@@ -7,7 +8,9 @@ const QuestionsList = () => {
 
   const backendURI =
     import.meta.env.VITE_BACKEND_URI || "http://localhost:3000";
-  const userId = import.meta.env.VITE_UID;
+
+  const userCtx = useContext(UserContext);
+  const { userId } = userCtx;
 
   useEffect(() => {
     fetch(`${backendURI}/api/questions`)

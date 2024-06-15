@@ -34,25 +34,19 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("User already exists");
   }
 
-  const user = await User.create({
-    name,
-    email,
-    password,
-    role,
-    mentorInformation: role === "mentor" ? { approval: false } : undefined,
-  });
+  const user = await User.create(req.body);
 
   if (user) {
     generateToken(res, user._id);
 
     res.status(201).json({
-      _id: user._id,
+      id: user._id,
       name: user.name,
       email: user.email,
       role: user.role,
-      mentorInformation:
-        user.role === "mentor" ? user.mentorInformation : undefined,
     });
+
+    console.log(user._id);
   } else {
     res.status(400);
     throw new Error("Invalid user data");
