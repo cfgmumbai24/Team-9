@@ -41,4 +41,6 @@ const Temp = () => {
   );
 };
 
-export default Temp;
+
+
+export default Temp

@@ -1,0 +1,22 @@
+/* src/components/styles.css */
+
+.mySwiper {
+    width: 300px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    margin: 0 auto; /* Center align the Swiper container */
+    padding: 2rem 0; /* Optional: add some padding to the Swiper container */
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images cover the entire area without distortion */
+    border-radius: 0.5rem; /* Optional: add some border radius to the images */
+}
