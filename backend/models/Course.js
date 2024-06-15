@@ -38,6 +38,22 @@ const courseSchema = new Schema({
   tags: [String],
 });
 
+const videoSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  videoUrl: {
+    type: String,
+    required: true,
+  },
+  course: {
+    type: Schema.Types.ObjectId,
+    ref: "Course",
+  },
+});
+
+export const Video = mongoose.model("Video", videoSchema);
 const Course = mongoose.model("Course", courseSchema);
 
 export default Course;

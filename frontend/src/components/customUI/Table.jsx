@@ -1,6 +1,9 @@
 import { Table } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 
 const CustomTable = ({ columns, data }) => {
+  const navigate = useNavigate();
+
   return (
     <Table>
       <Table.Head>
@@ -8,11 +11,19 @@ const CustomTable = ({ columns, data }) => {
           <Table.HeadCell key={index}>{column.header}</Table.HeadCell>
         ))}
       </Table.Head>
-      <Table.Body>
+      <Table.Body className="cursor-pointer">
         {data.map((row, rowIndex) => (
           <Table.Row key={rowIndex}>
             {columns.map((column, colIndex) => (
-              <Table.Cell key={colIndex}>{row[column.accessor]}</Table.Cell>
+              <Table.Cell
+                key={colIndex}
+                onClick={() => {
+                  console.log("Table Cell Clicked");
+                  navigate(`/courses/${row._id}`);
+                }}
+              >
+                {row[column.accessor]}
+              </Table.Cell>
             ))}
           </Table.Row>
         ))}

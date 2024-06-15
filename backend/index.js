@@ -12,6 +12,7 @@ import questionRoutes from "./routes/questions.js";
 import { initEdgeStore } from "@edgestore/server";
 import { createEdgeStoreExpressHandler } from "@edgestore/server/adapters/express";
 import { z } from "zod";
+import { seedVideos } from "./seeders/video.js";
 // import { generateUsers } from "./seeders/user.js";
 // import { generateQuestions } from "./seeders/question.js";
 
@@ -94,6 +95,7 @@ connectDB();
 
 // generateQuestions();
 // generateUsers(10);
+seedVideos(5);
 
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
