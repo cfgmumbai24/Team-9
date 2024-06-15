@@ -1,14 +1,34 @@
 import { Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Temp from './pages/Temp';
+import Courses from './pages/Courses';
+import { EdgeStoreProvider } from './utils/edgestore';
 
 function App() {
 	return (
 		<>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/temp' element={<Temp />} />
-			</Routes>
+			<EdgeStoreProvider basePath='http://localhost:3000/edgestore'>
+				{/* Rest of your app */}
+
+				<nav className=''>
+					<ul className='flex items-center gap-x-3'>
+						<li>
+							<Link to='/'>Home</Link>
+						</li>
+						<li>
+							<Link to='/temp'>Temp</Link>
+						</li>
+						<li>
+							<Link to='/courses'>Courses</Link>
+						</li>
+					</ul>
+				</nav>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/temp' element={<Temp />} />
+					<Route path='/courses' element={<Courses />} />
+				</Routes>
+			</EdgeStoreProvider>
 		</>
 	);
 }

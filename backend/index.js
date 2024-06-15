@@ -1,20 +1,99 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
+import cors from "cors";
+dotenv.config();
 import connectDB from "./lib/db.js";
+import cookieParser from "cookie-parser";
+import userRoutes from "./routes/user.js";
 import courseRoutes from "./routes/course.js";
+import bodyParser from "body-parser";
+
+import { initEdgeStore } from "@edgestore/server";
+import { createEdgeStoreExpressHandler } from "@edgestore/server/adapters/express";
+import { z } from "zod";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  })
+);
 app.use(express.json());
-connectDB();
+app.use(bodyParser.json());
+app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello from server!" });
+const es = initEdgeStore.create();
+const edgeStoreRouter = es.router({
+  publicFiles: es
+    .fileBucket()
+    .input(
+      z.object({
+        category: z.string(),
+      })
+    )
+    .beforeUpload(({ ctx, input, fileInfo }) => {
+      console.log("beforeUpload", ctx, input, fileInfo);
+      return true; // allow upload
+    })
+    /**
+     * return `true` to allow delete
+     * This function must be defined if you want to delete files directly from the client.
+     */
+    .beforeDelete(({ ctx, fileInfo }) => {
+      console.log("beforeDelete", ctx, fileInfo);
+      return true; // allow delete
+    }),
+  publicImages: es
+    .imageBucket()
+    .input(
+      z.object({
+        category: z.string(),
+      })
+    )
+    .beforeUpload(({ ctx, input, fileInfo }) => {
+      console.log("beforeUpload", ctx, input, fileInfo);
+      return true; // allow upload
+    })
+    /**
+     * return `true` to allow delete
+     * This function must be defined if you want to delete files directly from the client.
+     */
+    .beforeDelete(({ ctx, fileInfo }) => {
+      console.log("beforeDelete", ctx, fileInfo);
+      return true; // allow delete
+    }),
 });
 
+const getUserSession = async (req) => {
+  return {
+    id: "1",
+    role: "admin",
+  };
+};
+
+async function createContext({ req }) {
+  const { id, role } = await getUserSession(req); // replace with your own session logic
+
+  return {
+    userId: id,
+    userRole: role,
+  };
+}
+
+const handler = createEdgeStoreExpressHandler({
+  router: edgeStoreRouter,
+  createContext,
+});
+
+connectDB();
+
+app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
+
+app.get("/edgestore/*", handler);
+app.post("/edgestore/*", handler);
 
 const PORT = process.env.PORT || 3000;
 

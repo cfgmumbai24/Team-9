@@ -34,6 +34,8 @@ const courseSchema = new Schema({
       ref: "Video",
     },
   ],
+
+  tags: [String],
 });
 
 const Course = mongoose.model("Course", courseSchema);
