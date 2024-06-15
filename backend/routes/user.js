@@ -16,12 +16,17 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
 
   console.log(id);
 
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("mentor");
 
   if (user) {
     res.json(user);
@@ -30,6 +35,7 @@ router.get("/:id", async (req, res) => {
     throw new Error("User not found");
   }
 });
+
 router.post("/", registerUser);
 router.post("/auth", authUser);
 router.post("/logout", logoutUser);

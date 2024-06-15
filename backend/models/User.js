@@ -66,6 +66,11 @@ const userSchema = mongoose.Schema(
         },
       },
     ],
+
+    mentor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,

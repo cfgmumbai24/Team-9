@@ -1,7 +1,7 @@
 import { Table } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 
-const CustomTable = ({ columns, data }) => {
+const CustomTable = ({ columns, data, base = "courses" }) => {
   const navigate = useNavigate();
 
   return (
@@ -19,7 +19,7 @@ const CustomTable = ({ columns, data }) => {
                 key={colIndex}
                 onClick={() => {
                   console.log("Table Cell Clicked");
-                  navigate(`/courses/${row._id}`);
+                  navigate(`/${base}/${row._id}`);
                 }}
               >
                 {row[column.accessor]}

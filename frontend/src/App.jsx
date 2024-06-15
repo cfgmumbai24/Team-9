@@ -10,6 +10,7 @@ import UserForm from "./pages/Auth";
 import { UserContext, UserProvider } from "./context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import Profile from "./pages/Profile";
+import Mentors from "./pages/Mentors";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
             <Route path="/auth" element={<UserForm />}></Route>
 
             <Route path="/profile" element={<Profile />}></Route>
+
+            <Route path="/mentors" element={<Mentors />}></Route>
           </Routes>
         </UserProvider>
       </EdgeStoreProvider>
@@ -58,12 +61,17 @@ const Navbar = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/temp">Temp</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/courses">Courses</Link>
           </li>
+
+          <li>
+            <Link to="/mentors">Mentor</Link>
+          </li>
+
           {!user?.answers?.length ? (
             <li>
               <Link to="/questions">Questionnaire</Link>

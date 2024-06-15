@@ -16,6 +16,8 @@ import { seedVideos } from "./seeders/video.js";
 // import { generateUsers } from "./seeders/user.js";
 // import { generateQuestions } from "./seeders/question.js";
 
+import chatRoutes from "./routes/chat.js";
+
 dotenv.config();
 const app = express();
 app.use(
@@ -99,6 +101,7 @@ seedVideos(5);
 
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/chats", chatRoutes);
 
 app.use("/api/questions", questionRoutes);
 

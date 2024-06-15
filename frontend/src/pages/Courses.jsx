@@ -53,7 +53,7 @@ const Courses = () => {
     };
 
     fetchCourses();
-  }, []);
+  }, [userId, backendURI]);
 
   return (
     <div>

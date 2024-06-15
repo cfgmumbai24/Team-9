@@ -3,6 +3,7 @@ import express from "express";
 import Questions from "../models/Questions.js";
 import User from "../models/User.js";
 import { interestmapper } from "../utils/mapToInterests.js";
+import { allocatementor } from "../utils/mentorallocation.js";
 
 const router = express.Router();
 
@@ -45,6 +46,14 @@ router.post("/answer", async (req, res) => {
     dbuser.interests = interests;
 
     console.log(interests);
+
+    const users = await User.find({});
+    const mentor = allocatementor(dbuser, users);
+
+    console.log(mentor);
+
+    dbuser.mentor = mentor._id;
+    await dbuser.save();
 
     console.log(dbuser);
 
