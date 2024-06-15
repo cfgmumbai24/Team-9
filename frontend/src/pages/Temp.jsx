@@ -1,5 +1,9 @@
-const Temp = () => {
-  return <div>Temp</div>;
-};
+import React from 'react'
 
-export default Temp;
+const Temp = () => {
+  return (
+    <div>Temp</div>
+  )
+}
+
+export default Temp

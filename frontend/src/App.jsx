@@ -1,25 +1,22 @@
-import { Route, Routes, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Temp from "./pages/Temp";
+import { Route, Routes, Link, BrowserRouter } from "react-router-dom";
 
+import Navbar from "./components/Navbar/Navbar"; 
+import Home from "./pages/Home"
+import CourseList from "./pages/CourseList";
+import Footer from '../src/components/Footer/Footer'
 function App() {
   return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/temp">Temp</Link>
-          </li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/temp" element={<Temp />} />
-      </Routes>
-    </>
+    <div>
+     
+     <Navbar />
+     <Home />
+    <CourseList/>
+    <Footer/>
+     
+     
+   
+
+   </div>
   );
 }
 
