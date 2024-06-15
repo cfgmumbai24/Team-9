@@ -1,4 +1,4 @@
-import Navbar from '../components/customUI/Navbar';
+import Navbar from '../component/customUI/Navbar';
 
 const Home = () => {
 	<Navbar />;
