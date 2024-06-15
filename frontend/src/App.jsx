@@ -6,10 +6,10 @@ import { EdgeStoreProvider } from "./utils/edgestore";
 import QuestionsList from "./pages/Questionnaire";
 
 function App() {
-  return (
-    <>
-      <EdgeStoreProvider basePath="http://localhost:3000/edgestore">
-        {/* Rest of your app */}
+	return (
+		<>
+			<EdgeStoreProvider basePath='http://localhost:3000/edgestore'>
+				{/* Rest of your app */}
 
         <nav className="">
           <ul className="flex items-center gap-x-3">
