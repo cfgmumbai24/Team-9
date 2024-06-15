@@ -1,6 +1,5 @@
-import React from 'react';
-import './mentor_page.css'; // Make sure this path is correct based on your project structure
-import 'bootstrap-icons/font/bootstrap-icons.css'; // Ensure this package is installed via npm
+import "./mentor.css"; // Make sure this path is correct based on your project structure
+// import "bootstrap-icons/font/bootstrap-icons.css"; // Ensure this package is installed via npm
 
 function MentorDashboard() {
   return (

@@ -5,12 +5,13 @@ import Courses from "./pages/Courses";
 import { EdgeStoreProvider } from "./utils/edgestore";
 import QuestionsList from "./pages/Questionnaire";
 import Course from "./pages/Course";
+import MentorDashboard from "./component/Mentor/mentor";
 
 function App() {
-	return (
-		<>
-			<EdgeStoreProvider basePath='http://localhost:3000/edgestore'>
-				{/* Rest of your app */}
+  return (
+    <>
+      <EdgeStoreProvider basePath="http://localhost:3000/edgestore">
+        {/* Rest of your app */}
 
         <nav className="">
           <ul className="flex items-center gap-x-3">
@@ -31,6 +32,8 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/questions" element={<QuestionsList />} />
           <Route path="/courses/:id" element={<Course />} />
+
+          <Route path="/mentor" elemen={<MentorDashboard />} />
         </Routes>
       </EdgeStoreProvider>
     </>

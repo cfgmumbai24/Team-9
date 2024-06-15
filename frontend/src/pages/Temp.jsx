@@ -37,6 +37,9 @@ const Temp = () => {
       >
         Upload
       </button>
+
+      {/* <ChatBox /> */}
+      {/* <Education /> */}
     </div>
   );
 };
