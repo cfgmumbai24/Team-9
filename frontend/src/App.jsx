@@ -5,7 +5,6 @@ import Courses from "./pages/Courses";
 import { EdgeStoreProvider } from "./utils/edgestore";
 import QuestionsList from "./pages/Questionnaire";
 
-
 function App() {
   return (
     <>
