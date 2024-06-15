@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { Route, Routes, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import Temp from "./pages/Temp";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <h1>Counter</h1>
-        <p>{count}</p>
-        <button onClick={() => setCount(count + 1)}>Increment</button>
-      </div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/temp">Temp</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/temp" element={<Temp />} />
+      </Routes>
     </>
   );
 }
