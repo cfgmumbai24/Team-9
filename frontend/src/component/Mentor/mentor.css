@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.chat-icon {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    height: calc(100vh - 120px); /* Adjust height to take full viewport height minus header */
+    box-sizing: border-box;
+}
+
+.card1 {
+    background-color: #ffcccc; /* Light Red */
+}
+
+.card2 {
+    background-color: #ccffcc; /* Light Green */
+}
+
+.card3 {
+    background-color: #ccccff; /* Light Blue */
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.card p {
+    font-size: 24px;
+    color: #333;
+}

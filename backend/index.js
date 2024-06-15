@@ -7,10 +7,13 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.js";
 import courseRoutes from "./routes/course.js";
 import bodyParser from "body-parser";
+import questionRoutes from "./routes/questions.js";
 
 import { initEdgeStore } from "@edgestore/server";
 import { createEdgeStoreExpressHandler } from "@edgestore/server/adapters/express";
 import { z } from "zod";
+// import { generateUsers } from "./seeders/user.js";
+// import { generateQuestions } from "./seeders/question.js";
 
 dotenv.config();
 const app = express();
@@ -89,8 +92,13 @@ const handler = createEdgeStoreExpressHandler({
 
 connectDB();
 
+// generateQuestions();
+// generateUsers(10);
+
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
+
+app.use("/api/questions", questionRoutes);
 
 app.get("/edgestore/*", handler);
 app.post("/edgestore/*", handler);
