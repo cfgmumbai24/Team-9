@@ -15,6 +15,7 @@ const Temp = () => {
           setFile(e.target.files?.[0]);
         }}
       />
+
       <button
         onClick={async () => {
           if (file) {

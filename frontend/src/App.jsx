@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Temp from "./pages/Temp";
 import Courses from "./pages/Courses";
 import { EdgeStoreProvider } from "./utils/edgestore";
+import QuestionsList from "./pages/Questionnaire";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/temp" element={<Temp />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/questions" element={<QuestionsList />} />
         </Routes>
       </EdgeStoreProvider>
     </>
