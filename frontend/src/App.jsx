@@ -5,8 +5,8 @@ import Temp from "./pages/Temp";
 function App() {
   return (
     <>
-      <nav>
-        <ul>
+      <nav className="">
+        <ul className="flex items-center gap-x-3">
           <li>
             <Link to="/">Home</Link>
           </li>
