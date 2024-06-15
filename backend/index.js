@@ -9,6 +9,8 @@ import courseRoutes from "./routes/course.js";
 import bodyParser from "body-parser";
 import questionRoutes from "./routes/questions.js";
 
+import jobRoutes from "./routes/jobs.js";
+
 import { initEdgeStore } from "@edgestore/server";
 import { createEdgeStoreExpressHandler } from "@edgestore/server/adapters/express";
 import { z } from "zod";
@@ -17,6 +19,7 @@ import { seedVideos } from "./seeders/video.js";
 // import { generateQuestions } from "./seeders/question.js";
 
 import chatRoutes from "./routes/chat.js";
+import { seedJobs } from "./seeders/jobs.js";
 
 dotenv.config();
 const app = express();
@@ -97,11 +100,14 @@ connectDB();
 
 // generateQuestions();
 // generateUsers(10);
-seedVideos(5);
+// seedVideos(5);
+// seedJobs(5);
 
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/chats", chatRoutes);
+
+app.use("/api/jobs", jobRoutes);
 
 app.use("/api/questions", questionRoutes);
 

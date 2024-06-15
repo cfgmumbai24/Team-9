@@ -49,12 +49,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
     console.log(user._id);
 
-    const users = await User.find({});
-    const mentor = allocatementor(user, users);
-    console.log(mentor);
-
-    user.mentor = mentor._id;
-
     await user.save();
   } else {
     res.status(400);

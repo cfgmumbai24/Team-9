@@ -11,6 +11,7 @@ import { UserContext, UserProvider } from "./context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import Profile from "./pages/Profile";
 import Mentors from "./pages/Mentors";
+import Jobs from "./pages/Jobs";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
             <Route path="/profile" element={<Profile />}></Route>
 
             <Route path="/mentors" element={<Mentors />}></Route>
+
+            <Route path="/jobs" element={<Jobs />}></Route>
           </Routes>
         </UserProvider>
       </EdgeStoreProvider>
@@ -70,6 +73,10 @@ const Navbar = () => {
 
           <li>
             <Link to="/mentors">Mentor</Link>
+          </li>
+
+          <li>
+            <Link to="/jobs">Jobs</Link>
           </li>
 
           {!user?.answers?.length ? (

@@ -13,10 +13,7 @@ const jobSchema = new Schema({
       ref: "User",
     },
   ],
-  type: {
-    type: String,
-    required: true,
-  },
+  type: [String],
 });
 
 const Job = mongoose.model("Job", jobSchema);
