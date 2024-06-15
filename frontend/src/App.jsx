@@ -2,6 +2,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Temp from "./pages/Temp";
 import Courses from "./pages/Courses";
+import Auth from "./pages/Auth";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/temp" element={<Temp />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </>
   );
