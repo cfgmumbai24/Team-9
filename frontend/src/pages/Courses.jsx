@@ -57,22 +57,26 @@ const Courses = () => {
 
   return (
     <div>
-      <HeaderCarousel
-        descriptionText={
-          " The users can get guidance for the ideation of their fields of study from here "
-        }
-        headerText={"Courses"}
-        images={dummyImages}
-      />
+      <div className="mb-6">
+        <HeaderCarousel
+          descriptionText={
+            "The user can get an overview of the career opportunities available in the market."
+          }
+          headerText={"Courses"}
+          images={dummyImages}
+        />
+      </div>
 
-      <CustomTable
-        columns={tableMetadata}
-        data={courses?.map((course) => ({
-          ...course,
-          enrolled: course.enrolled.length,
-          tags: course.tags.join(", "),
-        }))}
-      />
+      <div className="px-8">
+        <CustomTable
+          columns={tableMetadata}
+          data={courses?.map((course) => ({
+            ...course,
+            enrolled: course.enrolled.length,
+            tags: course.tags.join(", "),
+          }))}
+        />
+      </div>
     </div>
   );
 };

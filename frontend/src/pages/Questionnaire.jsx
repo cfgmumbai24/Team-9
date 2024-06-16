@@ -54,24 +54,27 @@ const QuestionsList = () => {
   };
 
   return (
-    <div>
-      <h1>Questions</h1>
-      <ul>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">Questions</h1>
+      <ul className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
         {questions.map((question) => (
-          <li key={question._id}>
-            <h2>{question.question}</h2>
+          <li key={question._id} className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">
+              {question.question}
+            </h2>
             <ul>
               {question.options.map((option, index) => (
-                <li key={index}>
-                  <label>
+                <li key={index} className="mb-2">
+                  <label className="inline-flex items-center">
                     <input
                       type="radio"
                       name={`question-${question._id}`}
                       value={option}
                       onChange={() => handleOptionChange(question._id, option)}
                       checked={answers[question._id] === option}
+                      className="form-radio h-5 w-5 text-blue-600"
                     />
-                    {option}
+                    <span className="ml-2 text-gray-600">{option}</span>
                   </label>
                 </li>
               ))}
@@ -79,8 +82,12 @@ const QuestionsList = () => {
           </li>
         ))}
       </ul>
-      <button onClick={handleSubmit} disabled={isSubmitting}>
-        Submit Answers
+      <button
+        onClick={handleSubmit}
+        disabled={isSubmitting}
+        className="mt-6 bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50"
+      >
+        {isSubmitting ? "Submitting..." : "Submit Answers"}
       </button>
     </div>
   );

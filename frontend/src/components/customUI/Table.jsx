@@ -21,6 +21,7 @@ const CustomTable = ({ columns, data, base = "courses" }) => {
                   console.log("Table Cell Clicked");
                   navigate(`/${base}/${row._id}`);
                 }}
+                className=" border-y-2 border-gray-200"
               >
                 {row[column.accessor]}
               </Table.Cell>

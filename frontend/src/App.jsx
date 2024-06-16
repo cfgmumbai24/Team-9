@@ -84,11 +84,7 @@ const Navbar = () => {
               <Link to="/questions">Questionnaire</Link>
             </li>
           ) : null}
-          {userId ? (
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-          ) : (
+          {userId ? null : (
             <li>
               <Link to="/auth">Login</Link>
             </li>
